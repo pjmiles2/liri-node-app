@@ -65,7 +65,7 @@ function myTweets(){
 var params = {PatrickMiles: 'nodejs'};
 client.get('statuses/user_timeline', params, function(error, tweets, response) {
   if (!error) {
-      for(var i = 0; i < tweets.length; i ++) {
+      for(var i = 0; i < 20; i ++) {
     console.log("\uD83D\uDC23 " + tweets[i].text);
   }
 }
