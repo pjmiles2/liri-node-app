@@ -22,7 +22,7 @@ for (var j=3; j < input.length; j++){
 
 choices(command, title);
 
-function doWhatItSays(){
+function doWhatItSays() {
 
     fs.readFile("random.txt", "utf8", function(err, data) {
       if (err) {
@@ -35,7 +35,7 @@ function doWhatItSays(){
     );    
   };
 
-function choices(command, title){
+function choices(command, title) {
 switch(command) {
     case "my-tweets":
         myTweets();
@@ -48,8 +48,8 @@ switch(command) {
     break;
     
     case "movie-this":
-    if (title != null){
-        movieThis("'" + title + "'");
+    if (title != null) {
+        movieThis(title);
     } else {movieThis("Mr.+Nobody")};
     break;
 
@@ -93,7 +93,7 @@ function spotifyThisSong (title) {
 
 function movieThis(title) {
 
-    request("http://www.omdbapi.com/?t="+title+"&y=&plot=short&apikey=trilogy", function(error, response, body) {
+    request('http://www.omdbapi.com/?t="'+title+'"&y=&plot=short&apikey=trilogy', function(error, response, body) {
 
         if (!error && response.statusCode === 200) {
           console.log("-----------------------------------------------------------------------------")            
