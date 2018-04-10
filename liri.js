@@ -4,6 +4,7 @@ var keys = require("./keys.js");
 var Twitter = require('twitter');
 var Spotify = require('node-spotify-api');
 var request = require('request');
+var fs = require("fs");
 
 var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
@@ -19,6 +20,26 @@ for (var j=3; j < input.length; j++){
 
 }
 
+choices(command);
+
+function doWhatItSays(){
+    fs.readFile("random.txt", "utf8", function(err, data) {
+      if (err) {
+        return console.log(err);
+      }
+    
+      // Break the string down by comma separation and store the contents into the output array.
+      var output = data.split(",");
+      
+      console.log(output);
+
+      choices(output[0])
+      var fileParameter = output[1];
+    }
+    );    
+  };
+
+function choices(command){
 switch(command) {
     case "my-tweets":
         myTweets();
@@ -33,11 +54,16 @@ switch(command) {
     case "movie-this":
     if (title != null){
         movieThis("'" + title + "'");
-        } else {movieThis("Mr.+Nobody")};
+    } else if (fileParameter) {
+        movieThis("'" + fileParameter + "'");
+    } else {movieThis("Mr.+Nobody")};
     break;
 
+    case "do-what-it-says":
+        doWhatItSays();
+    break;
     };
-
+};
 
 
 function myTweets(){
@@ -85,5 +111,4 @@ function movieThis(title) {
 
         }
       });
-      
-};
+    };
