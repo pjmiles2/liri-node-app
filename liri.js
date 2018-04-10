@@ -70,9 +70,20 @@ function spotifyThisSong (title) {
 
 function movieThis(title) {
 
-request('http://www.omdbapi.com/?apikey=trilogy&t='+title, function (error, response, body) {
-  console.log('error:', error); // Print the error if one occurred
-  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-  console.log('body', response.Title)
-})
+    request("http://www.omdbapi.com/?t="+title+"&y=&plot=short&apikey=trilogy", function(error, response, body) {
+
+        if (!error && response.statusCode === 200) {
+      
+          console.log("Title: " + JSON.parse(body).Title);
+          console.log("Year: " + JSON.parse(body).Year);
+          console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
+          console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+          console.log("Country: " + JSON.parse(body).Country);
+          console.log("Language: " + JSON.parse(body).Language);
+          console.log("Plot: " + JSON.parse(body).Plot);
+          console.log("Cast: " + JSON.parse(body).Actors);
+
+        }
+      });
+      
 };
