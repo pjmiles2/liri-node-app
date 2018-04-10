@@ -20,9 +20,10 @@ for (var j=3; j < input.length; j++){
 
 }
 
-choices(command);
+choices(command, title);
 
 function doWhatItSays(){
+
     fs.readFile("random.txt", "utf8", function(err, data) {
       if (err) {
         return console.log(err);
@@ -33,13 +34,12 @@ function doWhatItSays(){
       
       console.log(output);
 
-      choices(output[0])
-      var fileParameter = output[1];
+      choices(output[0], output[1]);
     }
     );    
   };
 
-function choices(command){
+function choices(command, title){
 switch(command) {
     case "my-tweets":
         myTweets();
@@ -54,8 +54,6 @@ switch(command) {
     case "movie-this":
     if (title != null){
         movieThis("'" + title + "'");
-    } else if (fileParameter) {
-        movieThis("'" + fileParameter + "'");
     } else {movieThis("Mr.+Nobody")};
     break;
 
